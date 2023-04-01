@@ -1,6 +1,7 @@
 import type { Map as MapType } from "mapbox-gl";
 import { GeoJsonLayer, loadLayers, Map, useMapbox } from "../components/map";
 import "mapbox-gl/dist/mapbox-gl.css";
+import GeoData from "../../data/2022.geojson";
 
 // const mapInit = (map: MapType) => {
 //   loadLayers(map, [
@@ -29,7 +30,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 const testing = {
   source: {
     id: "accidents",
-    data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
+    data: './api/yearlyData',
   },
   layers: [
     {
@@ -44,7 +45,7 @@ const testing = {
       },
     },
   ],
-}
+};
 
 function App() {
   return (
@@ -56,7 +57,10 @@ function App() {
           zoom: 3.55,
         }}
       >
-        <GeoJsonLayer source={testing.source} layers={testing.layers}></GeoJsonLayer>
+        <GeoJsonLayer
+          source={testing.source}
+          layers={testing.layers}
+        ></GeoJsonLayer>
       </Map>
     </div>
   );
