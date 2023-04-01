@@ -9,6 +9,7 @@ import {
 import mapboxgl, {
   CircleLayer,
   FillLayer,
+  GeoJSONSourceRaw,
   LineLayer,
   SymbolLayer,
 } from "mapbox-gl";
@@ -130,7 +131,7 @@ export const loadGeojson = ({
   map: MapType;
   layers: (CircleLayer | FillLayer | LineLayer | SymbolLayer)[];
   source: {
-    data: FeatureCollection<Geometry, GeoJsonProperties> | string;
+    data: GeoJSONSourceRaw["data"];
     id: string;
   };
 }) => {
@@ -167,14 +168,11 @@ export const GeoJsonLayer = ({
   source,
 }: {
   layers: (CircleLayer | FillLayer | LineLayer | SymbolLayer)[];
-  source: {
-    data: FeatureCollection<Geometry, GeoJsonProperties> | string;
-    id: string;
-  };
+  source: { id: string; data: GeoJSONSourceRaw["data"] };
 }) => {
   const map = useMap();
   useEffect(() => {
     loadGeojson({ map, layers, source });
-  }, []);
+  }, [map, layers, source]);
   return null;
 };

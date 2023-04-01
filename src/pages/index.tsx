@@ -1,36 +1,11 @@
-import type { Map as MapType } from "mapbox-gl";
+import type { CircleLayer, GeoJSONSourceRaw, Map as MapType } from "mapbox-gl";
 import { GeoJsonLayer, loadLayers, Map, useMapbox } from "../components/map";
 import "mapbox-gl/dist/mapbox-gl.css";
-import GeoData from "../../data/2022.geojson";
 
-// const mapInit = (map: MapType) => {
-//   loadLayers(map, [
-//     {
-//       source: {
-//         id: "accidents",
-//         data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
-//       },
-//       layers: [
-//         {
-//           id: "accidents",
-//           type: "circle",
-//           source: "accidents",
-//           paint: {
-//             "circle-radius": 4,
-//             "circle-stroke-width": 2,
-//             "circle-color": "red",
-//             "circle-stroke-color": "white",
-//           },
-//         },
-//       ],
-//     },
-//   ]);
-// };
-
-const testing = {
+const testing: {source: {id: string, data: GeoJSONSourceRaw['data']}, layers: [CircleLayer]} = {
   source: {
     id: "accidents",
-    data: './api/yearlyData',
+    data: 'https://raw.githubusercontent.com/AvidDabbler/us-railroad-accidents/main/data/2022.geojson',
   },
   layers: [
     {
@@ -38,7 +13,11 @@ const testing = {
       type: "circle",
       source: "accidents",
       paint: {
-        "circle-radius": 4,
+        "circle-radius": [
+          'interpolate',
+          ['linear'],
+          
+        ],
         "circle-stroke-width": 2,
         "circle-color": "red",
         "circle-stroke-color": "white",
