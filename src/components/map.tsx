@@ -1,4 +1,11 @@
-import { RefObject, useEffect, useRef, useState, createContext } from "react";
+import {
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+  createContext,
+  useContext,
+} from "react";
 import mapboxgl, {
   CircleLayer,
   FillLayer,
@@ -22,6 +29,7 @@ export function useMapbox({
   const [map, setMap] = useState<MapType>();
   const [loaded, setLoaded] = useState<boolean>();
   useEffect(() => {
+    console.log("here");
     if (ref.current && !map && !loaded) {
       const map = new mapboxgl.Map({
         container: ref.current,
@@ -60,7 +68,7 @@ export const Map = ({
       const _map = new mapboxgl.Map({
         container: mapContainer.current,
         fitBoundsOptions: { padding: 100, maxZoom: 18 },
-        style: 'mapbox://styles/mapbox/streets-v12', // style URL
+        style: "mapbox://styles/mapbox/streets-v12", // style URL
         ...options,
       });
 
@@ -106,6 +114,14 @@ export const Map = ({
   );
 };
 
+export const useMap = () => {
+  const map = useContext(MapContext);
+  if (!map) {
+    throw new Error("useMap should be used in <Map> child components");
+  }
+  return map;
+};
+
 export const loadGeojson = ({
   map,
   layers,
@@ -118,12 +134,17 @@ export const loadGeojson = ({
     id: string;
   };
 }) => {
-  map.addSource(source.id, {
-    type: "geojson",
-    // Use a URL for the value for the `data` property.
-    data: source.data,
-  });
+  if (!map.getSource(source.id)) {
+    map.addSource(source.id, {
+      type: "geojson",
+      // Use a URL for the value for the `data` property.
+      data: source.data,
+    });
+  }
   layers.forEach((layer) => map.addLayer(layer));
+  return () => {
+    map.removeSource(source.id);
+  };
 };
 
 export const loadLayers = (
@@ -142,19 +163,18 @@ export const loadLayers = (
 };
 
 export const GeoJsonLayer = ({
-  map,
   layers,
   source,
 }: {
-  map: MapType;
   layers: (CircleLayer | FillLayer | LineLayer | SymbolLayer)[];
   source: {
     data: FeatureCollection<Geometry, GeoJsonProperties> | string;
     id: string;
   };
 }) => {
+  const map = useMap();
   useEffect(() => {
     loadGeojson({ map, layers, source });
-  }, [map]);
+  }, []);
   return null;
 };

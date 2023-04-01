@@ -2,29 +2,49 @@ import type { Map as MapType } from "mapbox-gl";
 import { GeoJsonLayer, loadLayers, Map, useMapbox } from "../components/map";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-const mapInit = (map: MapType) => {
-  loadLayers(map, [
+// const mapInit = (map: MapType) => {
+//   loadLayers(map, [
+//     {
+//       source: {
+//         id: "accidents",
+//         data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
+//       },
+//       layers: [
+//         {
+//           id: "accidents",
+//           type: "circle",
+//           source: "accidents",
+//           paint: {
+//             "circle-radius": 4,
+//             "circle-stroke-width": 2,
+//             "circle-color": "red",
+//             "circle-stroke-color": "white",
+//           },
+//         },
+//       ],
+//     },
+//   ]);
+// };
+
+const testing = {
+  source: {
+    id: "accidents",
+    data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
+  },
+  layers: [
     {
-      source: {
-        id: "accidents",
-        data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
+      id: "accidents",
+      type: "circle",
+      source: "accidents",
+      paint: {
+        "circle-radius": 4,
+        "circle-stroke-width": 2,
+        "circle-color": "red",
+        "circle-stroke-color": "white",
       },
-      layers: [
-        {
-          id: "accidents",
-          type: "circle",
-          source: "accidents",
-          paint: {
-            "circle-radius": 4,
-            "circle-stroke-width": 2,
-            "circle-color": "red",
-            "circle-stroke-color": "white",
-          },
-        },
-      ],
     },
-  ]);
-};
+  ],
+}
 
 function App() {
   return (
@@ -36,7 +56,7 @@ function App() {
           zoom: 3.55,
         }}
       >
-        {/* <GeoJsonLayer></GeoJsonLayer> */}
+        <GeoJsonLayer source={testing.source} layers={testing.layers}></GeoJsonLayer>
       </Map>
     </div>
   );
