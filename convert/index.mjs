@@ -35,7 +35,6 @@ export const loadJson = async (causes) => {
       });
     }
   }
-  console.log(updatedData.features[0]);
   fs.writeFileSync(
     path.join(process.cwd(), "data/all.json"),
     JSON.stringify(updatedData)

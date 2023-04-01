@@ -5,7 +5,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 const testing: {source: {id: string, data: GeoJSONSourceRaw['data']}, layers: [CircleLayer]} = {
   source: {
     id: "accidents",
-    data: 'https://raw.githubusercontent.com/AvidDabbler/us-railroad-accidents/main/data/2022.geojson',
+    data: 'https://raw.githubusercontent.com/AvidDabbler/us-railroad-accidents/main/data/all.json',
   },
   layers: [
     {
@@ -13,11 +13,12 @@ const testing: {source: {id: string, data: GeoJSONSourceRaw['data']}, layers: [C
       type: "circle",
       source: "accidents",
       paint: {
-        "circle-radius": [
-          'interpolate',
-          ['linear'],
-          
-        ],
+        "circle-radius": 4,
+        // "circle-radius": [
+        //   'interpolate',
+        //   ['linear'],
+
+        // ],
         "circle-stroke-width": 2,
         "circle-color": "red",
         "circle-stroke-color": "white",
