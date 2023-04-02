@@ -47,7 +47,7 @@ export const loadJson = async (causes, effects) => {
     }
   }
   fs.writeFileSync(
-    path.join(process.cwd(), "data/all.json"),
+    path.join(process.cwd(), "data/us-railroad-accidents-2012-2022.json"),
     JSON.stringify(updatedData)
   );
 };
