@@ -7,7 +7,7 @@
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
-    "convert": "node convert/index.mjs"
+    "convert": "node convert-train-crashes/index.mjs"
   },
   "dependencies": {
     "@types/geojson": "^7946.0.10",

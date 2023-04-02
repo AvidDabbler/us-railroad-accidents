@@ -30,5 +30,5 @@
     "**/*.mjs",
     "**/*.js"
   ],
-  "exclude": ["node_modules", "convert/*"]
+  "exclude": ["node_modules", "convert-train-crashes/*"]
 }
