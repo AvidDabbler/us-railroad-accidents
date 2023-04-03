@@ -10,6 +10,7 @@ import mapboxgl, {
   CircleLayer,
   FillLayer,
   GeoJSONSourceRaw,
+  HeatmapLayer,
   LineLayer,
   SymbolLayer,
 } from "mapbox-gl";
@@ -129,7 +130,7 @@ export const loadGeojson = ({
   source,
 }: {
   map: MapType;
-  layers: (CircleLayer | FillLayer | LineLayer | SymbolLayer)[];
+  layers: (CircleLayer | FillLayer | LineLayer | SymbolLayer | HeatmapLayer)[];
   source: {
     data: GeoJSONSourceRaw["data"];
     id: string;
@@ -151,7 +152,7 @@ export const loadGeojson = ({
 export const loadLayers = (
   map: MapType,
   layerConfigs: {
-    layers: (CircleLayer | FillLayer | LineLayer | SymbolLayer)[];
+    layers: (CircleLayer | FillLayer | LineLayer | SymbolLayer | HeatmapLayer)[];
     source: {
       data: FeatureCollection<Geometry, GeoJsonProperties> | string;
       id: string;
@@ -167,7 +168,7 @@ export const GeoJsonLayer = ({
   layers,
   source,
 }: {
-  layers: (CircleLayer | FillLayer | LineLayer | SymbolLayer)[];
+  layers: (CircleLayer | FillLayer | LineLayer | SymbolLayer | HeatmapLayer)[];
   source: { id: string; data: GeoJSONSourceRaw["data"] };
 }) => {
   const map = useMap();

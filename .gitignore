@@ -42,3 +42,4 @@ yarn-error.log*
 *.tsbuildinfo
 
 **/node_modules
+data/org/county.geo.json
