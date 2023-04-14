@@ -70,7 +70,7 @@ export const Map = ({
       const _map = new mapboxgl.Map({
         container: mapContainer.current,
         fitBoundsOptions: { padding: 100, maxZoom: 18 },
-        style: "mapbox://styles/mapbox/streets-v12", // style URL
+        style: "mapbox://styles/mapbox/navigation-night-v1", // style URL
         ...options,
       });
 
@@ -97,6 +97,7 @@ export const Map = ({
       console.log("A error event occurred.", e, rest);
     };
     map.on("style.load", onStyleChange);
+    ``;
     map.on("error", onError);
     return () => {
       map.off("style.load", onStyleChange);
@@ -152,7 +153,13 @@ export const loadGeojson = ({
 export const loadLayers = (
   map: MapType,
   layerConfigs: {
-    layers: (CircleLayer | FillLayer | LineLayer | SymbolLayer | HeatmapLayer)[];
+    layers: (
+      | CircleLayer
+      | FillLayer
+      | LineLayer
+      | SymbolLayer
+      | HeatmapLayer
+    )[];
     source: {
       data: FeatureCollection<Geometry, GeoJsonProperties> | string;
       id: string;
